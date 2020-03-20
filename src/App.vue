@@ -1,7 +1,8 @@
 <template>
   <div id="app">
     <Header />
-    <AddTodo />
+    <!-- v-on: on event we call it add-todo, that call addTodo(), the event I think is using the AddTodo component-->
+    <AddTodo v-on:add-todo="addTodo" />
     <!-- receives the emitted todo.id from del-todo sent by the v-on from Todos.vue, deleteTodo function can now receive the todo.id
     as an argument as it was paased from Todos component up to here in App.vue component-->
     <Todos v-bind:todos = "todos" v-on:del-todo="deleteTodo"/>
@@ -29,6 +30,10 @@ export default {
       this.todos = this.todos.filter(
         todo => todo.id !== id
       )
+    },
+    addTodo(newTodo){
+      //return todos with the todos + added todo from the form:
+        this.todos = [...this.todos, newTodo]; 
     }
 
   },
