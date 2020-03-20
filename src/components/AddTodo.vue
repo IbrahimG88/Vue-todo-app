@@ -1,42 +1,44 @@
 <template>
-<div>
-    <!-- on submit event call addTodo()-->
-    <form @submit="addTodo">
-        <!-- v-model for data binding, bound to title from data() function in the script -->
-        <input type="text" name="title" v-model="title" placeholder="Add Todo...">
-        <input type="submit" value="Submit" />
+  <div>
+    <form @submit.prevent="addTodo">
+      <input type="text" v-model="title" name="title" placeholder="Add Todo...">
+      <input type="submit" value="Submit" class="btn">
     </form>
-</div>
-    
+  </div>
 </template>
 
 <script>
+// import uuid from 'uuid';
 export default {
-    name:"AddTodo",
-    data(){
-        return {
-            title: ""
-        }
-    },
-    methods:{
-        // the e event refers to the form returned data
-        addTodo(e) {
-            e.preventDefault();
-            const newTodo = {
-                // since the api provides an id we may remove the id from here
-                title: this.title,
-                completed: false
-            }
-            this.$emit('add-todo', newTodo);
-            // to reset form title
-            this.title = '';
-  
-        }
+  name: "AddTodo",
+  data() {
+    return {
+      title: ''
     }
+  },
+  methods: {
+    addTodo() {
+      const newTodo = {
+        title: this.title,
+        completed: false
+      }
+      // Send up to parent
+      this.$emit('add-todo', newTodo);
+      this.title = '';
+    }
+  }
 }
-
 </script>
 
-<style>
-
+<style scoped>
+  form {
+    display: flex;
+  }
+  input[type="text"] {
+    flex: 10;
+    padding: 5px;
+  }
+  input[type="submit"] {
+    flex: 2;
+  }
 </style>
