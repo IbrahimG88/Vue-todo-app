@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <Todos v-bind:todos = "todos"/>
+    <!-- receives the emitted todo.id from del-todo sent by the v-on from Todos.vue, deleteTodo function can now receive the todo.id
+    as an argument as it was paased from Todos component up to here in App.vue component-->
+    <Todos v-bind:todos = "todos" v-on:del-todo="deleteTodo"/>
     
   </div>
 </template>
@@ -12,6 +14,17 @@ export default {
   name: 'App',
   components: {
     Todos
+  }, methods:{
+     /* filter() will return a new todos object, with the one that has the id of the 
+     * one passed as function argument will be deleted
+     * filter() is like a for loop with a condition that returns only  the items that fullfill that condition
+     */
+    deleteTodo(id) {
+      this.todos = this.todos.filter(
+        todo => todo.id !== id
+      )
+    }
+
   },
   data() {
     return {
