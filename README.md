@@ -22,3 +22,9 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+### Commits
+- json placeholder was used as a mockup api
+- axios was used for http requests
+- at the final commit vue-router was added
