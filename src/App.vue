@@ -35,9 +35,12 @@ export default {
      * filter() is like a for loop with a condition that returns only  the items that fullfill that condition
      */
     deleteTodo(id) {
-      this.todos = this.todos.filter(
-        todo => todo.id !== id
-      )
+      // here changed the type of ticks, added the id to the url
+      // we are deleting the todo item from the ui and the  
+      axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
+      .then(res => this.todos = this.todos.filter(
+        todo => todo.id !== id ))
+      .catch(err => console.log(err));
     },
     addTodo(newTodo){
       //return todos with the todos + added todo from the form:
