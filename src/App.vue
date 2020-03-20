@@ -36,7 +36,8 @@ export default {
      */
     deleteTodo(id) {
       // here changed the type of ticks, added the id to the url
-      // we are deleting the todo item from the ui and the  
+      // we are deleting the todo item from the ui and the 
+      // filter passes all todos if id is not equal to id from the function argument 
       axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
       .then(res => this.todos = this.todos.filter(
         todo => todo.id !== id ))
