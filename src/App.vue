@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <Header />
+    <AddTodo />
     <!-- receives the emitted todo.id from del-todo sent by the v-on from Todos.vue, deleteTodo function can now receive the todo.id
     as an argument as it was paased from Todos component up to here in App.vue component-->
     <Todos v-bind:todos = "todos" v-on:del-todo="deleteTodo"/>
@@ -11,12 +12,14 @@
 <script>
 import Todos from './components/Todos';
 import Header from './components/Layout/Header';
+import AddTodo from './components/AddTodo';
 
 export default {
   name: 'App',
   components: {
     Todos,
-    Header
+    Header,
+    AddTodo
   }, methods:{
      /* filter() will return a new todos object, with the one that has the id of the 
      * one passed as function argument will be deleted
