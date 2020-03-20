@@ -39,8 +39,9 @@ export default {
       // we are deleting the todo item from the ui and the 
       // filter passes all todos if id is not equal to id from the function argument 
       axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
-      .then(res => this.todos = this.todos.filter(
-        todo => todo.id !== id ))
+      // eslint-disable-next-line no-unused-vars
+      .then(res => this.todos = this.todos.filter(todo => 
+      todo.id !== id ))
       .catch(err => console.log(err));
     },
     addTodo(newTodo){
