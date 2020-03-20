@@ -14,6 +14,7 @@
 import Todos from './components/Todos';
 import Header from './components/Layout/Header';
 import AddTodo from './components/AddTodo';
+import axios from 'axios';
 
 export default {
   name: 'App',
@@ -21,7 +22,14 @@ export default {
     Todos,
     Header,
     AddTodo
-  }, methods:{
+  },
+  data() {
+    return {
+      //source of the todos prop: notice next line
+      todos:[]
+    }
+  }, 
+  methods:{
      /* filter() will return a new todos object, with the one that has the id of the 
      * one passed as function argument will be deleted
      * filter() is like a for loop with a condition that returns only  the items that fullfill that condition
@@ -34,30 +42,25 @@ export default {
     addTodo(newTodo){
       //return todos with the todos + added todo from the form:
         this.todos = [...this.todos, newTodo]; 
-    }
+      }
+    }, created() {
+    // a function that fires off when the component loads, 
+    // similar to component did mount in react
+    // we will use axios to create a get request: which will return a promise
+    // that has to be handled with .then
+    // the response res, includes data property that includes all todos
+    // this.todos refers to todos empty array from the data() above, 
+    // which will be poppulated with the response data
 
-  },
-  data() {
-    return {
-      //source of the todos prop: notice next line
-      todos:[{
-        id:1,
-        title:"Todo one",
-        completed: false
-      },
-      {
-        id:2,
-        title:"Todo two",
-        completed: true
-      },
-      {
-        id:3,
-        title:"Todo three",
-        completed: false
-      }]
+
+    //will get all todos from the api: axios.get('https://jsonplaceholder.typicode.com/todos')
+    // will get only 10 using the query parameter
+    axios.get('https://jsonplaceholder.typicode.com/todos?_limit=10')
+    .then(res => this.todos = res.data)
+    .catch(err => console.log(err));
     }
   }
-}
+
 </script>
 
 <style>
