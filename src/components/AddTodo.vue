@@ -11,8 +11,6 @@
 </template>
 
 <script>
-import { v4 as uuidv4 } from 'uuid';
-
 export default {
     name:"AddTodo",
     data(){
@@ -25,8 +23,7 @@ export default {
         addTodo(e) {
             e.preventDefault();
             const newTodo = {
-                //uuid uses generated id from  package uuid
-                id: uuidv4(),
+                // since the api provides an id we may remove the id from here
                 title: this.title,
                 completed: false
             }

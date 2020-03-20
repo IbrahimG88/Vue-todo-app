@@ -41,7 +41,18 @@ export default {
     },
     addTodo(newTodo){
       //return todos with the todos + added todo from the form:
-        this.todos = [...this.todos, newTodo]; 
+      const { title, completed } = newTodo;
+
+      // post request and adding the created data
+      axios.post('https://jsonplaceholder.typicode.com/todos', {
+        title,
+        completed
+        // this is the same as -in es6-:{ title:title, completed: completed }
+        // res.data refers to the newly todo created here
+      })
+      .then(res =>  this.todos = [...this.todos, res.data])
+      .catch(err => console.log(err));
+     
       }
     }, created() {
     // a function that fires off when the component loads, 
@@ -54,8 +65,8 @@ export default {
 
 
     //will get all todos from the api: axios.get('https://jsonplaceholder.typicode.com/todos')
-    // will get only 10 using the query parameter
-    axios.get('https://jsonplaceholder.typicode.com/todos?_limit=10')
+    // will get only 5 using the query parameter
+    axios.get('https://jsonplaceholder.typicode.com/todos?_limit=5')
     .then(res => this.todos = res.data)
     .catch(err => console.log(err));
     }
